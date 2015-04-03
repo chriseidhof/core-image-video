@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83204DC81ACEC03400167A48 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83204DC71ACEC03400167A48 /* Library.swift */; };
+		83204DCA1ACEC5E500167A48 /* StaticVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83204DC91ACEC5E500167A48 /* StaticVideoViewController.swift */; };
 		836E8FA11ACE8C9400C64102 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E8FA01ACE8C9400C64102 /* AppDelegate.swift */; };
-		836E8FA31ACE8C9400C64102 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E8FA21ACE8C9400C64102 /* ViewController.swift */; };
+		836E8FA31ACE8C9400C64102 /* SimpleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E8FA21ACE8C9400C64102 /* SimpleFilterViewController.swift */; };
 		836E8FA61ACE8C9400C64102 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 836E8FA41ACE8C9400C64102 /* Main.storyboard */; };
 		836E8FA81ACE8C9400C64102 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 836E8FA71ACE8C9400C64102 /* Images.xcassets */; };
 		836E8FB71ACE8C9400C64102 /* CoreImageVideoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E8FB61ACE8C9400C64102 /* CoreImageVideoTests.swift */; };
@@ -26,10 +28,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		83204DC71ACEC03400167A48 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		83204DC91ACEC5E500167A48 /* StaticVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticVideoViewController.swift; sourceTree = "<group>"; };
 		836E8F9B1ACE8C9400C64102 /* CoreImageVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreImageVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		836E8F9F1ACE8C9400C64102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		836E8FA01ACE8C9400C64102 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		836E8FA21ACE8C9400C64102 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		836E8FA21ACE8C9400C64102 /* SimpleFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleFilterViewController.swift; sourceTree = "<group>"; };
 		836E8FA51ACE8C9400C64102 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		836E8FA71ACE8C9400C64102 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		836E8FB01ACE8C9400C64102 /* CoreImageVideoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreImageVideoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,11 +82,13 @@
 			isa = PBXGroup;
 			children = (
 				836E8FA01ACE8C9400C64102 /* AppDelegate.swift */,
-				836E8FA21ACE8C9400C64102 /* ViewController.swift */,
+				836E8FA21ACE8C9400C64102 /* SimpleFilterViewController.swift */,
 				836E8FA41ACE8C9400C64102 /* Main.storyboard */,
 				836E8FA71ACE8C9400C64102 /* Images.xcassets */,
 				836E8F9E1ACE8C9400C64102 /* Supporting Files */,
 				836E8FC01ACE9A4F00C64102 /* FunctionalCoreImage.swift */,
+				83204DC71ACEC03400167A48 /* Library.swift */,
+				83204DC91ACEC5E500167A48 /* StaticVideoViewController.swift */,
 			);
 			path = CoreImageVideo;
 			sourceTree = "<group>";
@@ -211,8 +217,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83204DCA1ACEC5E500167A48 /* StaticVideoViewController.swift in Sources */,
 				836E8FC11ACE9A4F00C64102 /* FunctionalCoreImage.swift in Sources */,
-				836E8FA31ACE8C9400C64102 /* ViewController.swift in Sources */,
+				83204DC81ACEC03400167A48 /* Library.swift in Sources */,
+				836E8FA31ACE8C9400C64102 /* SimpleFilterViewController.swift in Sources */,
 				836E8FA11ACE8C9400C64102 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
