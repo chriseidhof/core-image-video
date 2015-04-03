@@ -64,10 +64,79 @@ extension AVCaptureDevicePosition {
     }
 }
 
+private let pixelBufferDict: [NSObject:AnyObject] = [kCVPixelBufferPixelFormatTypeKey: kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
+
+typealias BufferConsumer = (CMSampleBuffer, CGAffineTransform) -> ()
+
+class DisplayLinkDelegate: NSObject {
+    var callback: CFTimeInterval -> ()
+    
+    init(_ callback: CFTimeInterval -> ()) {
+        self.callback = callback
+    }
+    
+}
+
+class PlayerItemDelegate: NSObject, AVPlayerItemOutputPullDelegate {
+    weak var delegate: MediaReadyDelegate?
+    
+    init(_ delegate: MediaReadyDelegate) {
+        self.delegate = delegate
+    }
+    
+    func outputMediaDataWillChange(sender: AVPlayerItemOutput!) {
+        delegate?.start()
+    }
+}
+
+protocol MediaReadyDelegate: AnyObject {
+    func start()
+}
+
+class VideoSampleBufferSource: NSObject, MediaReadyDelegate {
+    var displayLink: CADisplayLink?
+    var itemDelegate: PlayerItemDelegate?
+    let videoOutput: AVPlayerItemVideoOutput
+    let consumer: CVPixelBuffer -> ()
+    let player: AVPlayer
+    
+    init?(url: NSURL, consumer: CVPixelBuffer -> ()) {
+        player = AVPlayer(URL: url)
+        
+        self.consumer = consumer
+        videoOutput = AVPlayerItemVideoOutput(pixelBufferAttributes: pixelBufferDict)
+        player.currentItem.addOutput(videoOutput)
+        
+        super.init()
+        displayLink = CADisplayLink(target: self, selector: "displayLinkDidRefresh:")
+        itemDelegate = PlayerItemDelegate(self)
+        videoOutput.setDelegate(itemDelegate, queue: dispatch_get_main_queue())
+        videoOutput.requestNotificationOfMediaDataChangeWithAdvanceInterval(0)
+
+        start()
+        player.play()
+
+    }
+    
+    func start() {
+        displayLink?.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
+    }
+    
+    func displayLinkDidRefresh(link: CADisplayLink) {
+        let itemTime = videoOutput.itemTimeForHostTime(CACurrentMediaTime())
+        if videoOutput.hasNewPixelBufferForItemTime(itemTime) {
+            var presentationItemTime = kCMTimeZero
+            let pixelBuffer = videoOutput.copyPixelBufferForItemTime(itemTime, itemTimeForDisplay: &presentationItemTime)
+            consumer(pixelBuffer)
+        }
+
+    }
+
+}
+
 
 struct SampleBufferSource {
     
-    typealias BufferConsumer = (CMSampleBuffer, CGAffineTransform) -> ()
     
     let captureSession: AVCaptureSession
     let delegate: SampleBufferDelegate
@@ -80,14 +149,14 @@ struct SampleBufferSource {
             }
         }
     }
-    
+   
     init?(device: AVCaptureDevice, transform: CGAffineTransform, callback: BufferConsumer) {
         captureSession = AVCaptureSession()
         if let deviceInput = AVCaptureDeviceInput(device: device, error: nil) where captureSession.canAddInput(deviceInput) {
             captureSession.addInput(deviceInput)
             let dataOutput = AVCaptureVideoDataOutput()
             dataOutput.alwaysDiscardsLateVideoFrames = true
-            dataOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey: kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
+            dataOutput.videoSettings = pixelBufferDict
             delegate = SampleBufferDelegate { buffer in
                 callback(buffer, transform)
             }
@@ -105,8 +174,7 @@ struct SampleBufferSource {
             return
         }
         return nil
-    }
-    
+    }        
 }
 
 

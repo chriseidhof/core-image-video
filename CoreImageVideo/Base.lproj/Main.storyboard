@@ -96,7 +96,7 @@
         <!--Static Video View Controller-->
         <scene sceneID="E8Z-1w-dg3">
             <objects>
-                <viewController id="qN3-cE-Kvf" customClass="StaticVideoViewController" sceneMemberID="viewController">
+                <viewController id="qN3-cE-Kvf" customClass="StaticVideoViewController" customModule="CoreImageVideo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Gwf-WC-LI8"/>
                         <viewControllerLayoutGuide type="bottom" id="Jei-ug-ik3"/>
