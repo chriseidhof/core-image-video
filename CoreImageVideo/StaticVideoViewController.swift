@@ -9,15 +9,7 @@
 import UIKit
 import AVFoundation
 
-extension CGRect {
-    var center: CGPoint {
-        return CGPoint(x: midX, y: midY)
-    }
-}
-
-
 class StaticVideoViewController: UIViewController {
-    var source: SampleBufferSource?
     var coreImageView: CoreImageView?
     var videoSource: VideoSampleBufferSource?
     
@@ -39,18 +31,5 @@ class StaticVideoViewController: UIViewController {
             let output = blendWithMask(image, mask)(background)
             self.coreImageView?.image = output
         }
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        source?.running = false
-    }
-    
-    func setupCameraSource() {
-        source = SampleBufferSource(position: AVCaptureDevicePosition.Front) { [unowned self] (buffer, transform) in
-            let input = ciImage(buffer).imageByApplyingTransform(transform)
-            let filter = hueAdjust(self.angleForCurrentTime)
-//            self.coreImageView?.image = filter(input)
-        }
-        source?.running = true
-    }
+    }    
 }

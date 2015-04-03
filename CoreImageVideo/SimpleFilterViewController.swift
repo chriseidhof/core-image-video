@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 class SimpleFilterViewController: UIViewController {
-    var source: SampleBufferSource?
+    var source: CaptureBufferSource?
     var coreImageView: CoreImageView?
 
     var angleForCurrentTime: Float {
@@ -31,8 +31,8 @@ class SimpleFilterViewController: UIViewController {
     }
     
     func setupCameraSource() {
-        source = SampleBufferSource(position: AVCaptureDevicePosition.Front) { [unowned self] (buffer, transform) in
-            let input = ciImage(buffer).imageByApplyingTransform(transform)
+        source = CaptureBufferSource(position: AVCaptureDevicePosition.Front) { [unowned self] (buffer, transform) in
+            let input = CIImage(buffer: buffer).imageByApplyingTransform(transform)
             let filter = hueAdjust(self.angleForCurrentTime)
             self.coreImageView?.image = filter(input)
         }

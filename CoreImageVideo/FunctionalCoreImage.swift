@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import QuartzCore
 
 typealias Filter = CIImage -> CIImage
 
@@ -90,11 +89,12 @@ func compositeSourceOver(overlay: CIImage) -> Filter {
 
 
 func radialGradient(center: CGPoint, radius: CGFloat) -> CIImage {
-    let params: [NSObject: AnyObject] = [ "inputColor0": CIColor(red: 1, green: 1, blue: 1)
-        , "inputColor1": CIColor(red: 0, green: 0, blue: 0)
-        , "inputCenter": CIVector(CGPoint: center)
-        , "inputRadius0": radius
-        , "inputRadius1": radius + 1
+    let params: [NSObject: AnyObject] = [
+        "inputColor0": CIColor(red: 1, green: 1, blue: 1),
+        "inputColor1": CIColor(red: 0, green: 0, blue: 0),
+        "inputCenter": CIVector(CGPoint: center),
+        "inputRadius0": radius,
+        "inputRadius1": radius + 1
     ]
     return CIFilter(name: "CIRadialGradient", withInputParameters: params).outputImage
 }

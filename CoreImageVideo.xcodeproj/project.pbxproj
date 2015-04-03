@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		83204DC81ACEC03400167A48 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83204DC71ACEC03400167A48 /* Library.swift */; };
+		83204DC81ACEC03400167A48 /* VideoSampleBufferSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83204DC71ACEC03400167A48 /* VideoSampleBufferSource.swift */; };
 		83204DCA1ACEC5E500167A48 /* StaticVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83204DC91ACEC5E500167A48 /* StaticVideoViewController.swift */; };
 		83204DCC1ACED68A00167A48 /* Cat.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 83204DCB1ACED68300167A48 /* Cat.mp4 */; };
 		836E8FA11ACE8C9400C64102 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E8FA01ACE8C9400C64102 /* AppDelegate.swift */; };
@@ -16,6 +16,9 @@
 		836E8FA81ACE8C9400C64102 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 836E8FA71ACE8C9400C64102 /* Images.xcassets */; };
 		836E8FB71ACE8C9400C64102 /* CoreImageVideoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E8FB61ACE8C9400C64102 /* CoreImageVideoTests.swift */; };
 		836E8FC11ACE9A4F00C64102 /* FunctionalCoreImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E8FC01ACE9A4F00C64102 /* FunctionalCoreImage.swift */; };
+		83AEA8411ACF2759007A6530 /* CoreImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AEA8401ACF2759007A6530 /* CoreImageView.swift */; };
+		83AEA8431ACF283B007A6530 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AEA8421ACF283B007A6530 /* Extensions.swift */; };
+		83AEA8451ACF29D0007A6530 /* CameraBufferSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AEA8441ACF29D0007A6530 /* CameraBufferSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,7 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		83204DC71ACEC03400167A48 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		83204DC71ACEC03400167A48 /* VideoSampleBufferSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSampleBufferSource.swift; sourceTree = "<group>"; };
 		83204DC91ACEC5E500167A48 /* StaticVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticVideoViewController.swift; sourceTree = "<group>"; };
 		83204DCB1ACED68300167A48 /* Cat.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cat.mp4; sourceTree = "<group>"; };
 		836E8F9B1ACE8C9400C64102 /* CoreImageVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreImageVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +45,9 @@
 		836E8FB51ACE8C9400C64102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		836E8FB61ACE8C9400C64102 /* CoreImageVideoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreImageVideoTests.swift; sourceTree = "<group>"; };
 		836E8FC01ACE9A4F00C64102 /* FunctionalCoreImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionalCoreImage.swift; sourceTree = "<group>"; };
+		83AEA8401ACF2759007A6530 /* CoreImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreImageView.swift; sourceTree = "<group>"; };
+		83AEA8421ACF283B007A6530 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		83AEA8441ACF29D0007A6530 /* CameraBufferSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraBufferSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,15 +89,13 @@
 		836E8F9D1ACE8C9400C64102 /* CoreImageVideo */ = {
 			isa = PBXGroup;
 			children = (
-				83204DCB1ACED68300167A48 /* Cat.mp4 */,
 				836E8FA01ACE8C9400C64102 /* AppDelegate.swift */,
 				836E8FA21ACE8C9400C64102 /* SimpleFilterViewController.swift */,
+				83204DC91ACEC5E500167A48 /* StaticVideoViewController.swift */,
 				836E8FA41ACE8C9400C64102 /* Main.storyboard */,
 				836E8FA71ACE8C9400C64102 /* Images.xcassets */,
 				836E8F9E1ACE8C9400C64102 /* Supporting Files */,
-				836E8FC01ACE9A4F00C64102 /* FunctionalCoreImage.swift */,
-				83204DC71ACEC03400167A48 /* Library.swift */,
-				83204DC91ACEC5E500167A48 /* StaticVideoViewController.swift */,
+				83AEA8461ACF2A6C007A6530 /* Library */,
 			);
 			path = CoreImageVideo;
 			sourceTree = "<group>";
@@ -99,6 +103,7 @@
 		836E8F9E1ACE8C9400C64102 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				83204DCB1ACED68300167A48 /* Cat.mp4 */,
 				836E8F9F1ACE8C9400C64102 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -119,6 +124,18 @@
 				836E8FB51ACE8C9400C64102 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		83AEA8461ACF2A6C007A6530 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				836E8FC01ACE9A4F00C64102 /* FunctionalCoreImage.swift */,
+				83204DC71ACEC03400167A48 /* VideoSampleBufferSource.swift */,
+				83AEA8401ACF2759007A6530 /* CoreImageView.swift */,
+				83AEA8421ACF283B007A6530 /* Extensions.swift */,
+				83AEA8441ACF29D0007A6530 /* CameraBufferSource.swift */,
+			);
+			name = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,9 +240,12 @@
 			files = (
 				83204DCA1ACEC5E500167A48 /* StaticVideoViewController.swift in Sources */,
 				836E8FC11ACE9A4F00C64102 /* FunctionalCoreImage.swift in Sources */,
-				83204DC81ACEC03400167A48 /* Library.swift in Sources */,
+				83204DC81ACEC03400167A48 /* VideoSampleBufferSource.swift in Sources */,
+				83AEA8411ACF2759007A6530 /* CoreImageView.swift in Sources */,
 				836E8FA31ACE8C9400C64102 /* SimpleFilterViewController.swift in Sources */,
 				836E8FA11ACE8C9400C64102 /* AppDelegate.swift in Sources */,
+				83AEA8431ACF283B007A6530 /* Extensions.swift in Sources */,
+				83AEA8451ACF29D0007A6530 /* CameraBufferSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
