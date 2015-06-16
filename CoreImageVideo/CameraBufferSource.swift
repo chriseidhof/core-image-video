@@ -51,7 +51,7 @@ struct CaptureBufferSource {
     }
 }
 
-private class CaptureBufferDelegate: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
+class CaptureBufferDelegate: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     let callback: CMSampleBuffer -> ()
     
     init(_ callback: CMSampleBuffer -> ()) {
