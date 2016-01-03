@@ -26,7 +26,7 @@ struct CaptureBufferSource {
     
     init?(device: AVCaptureDevice, transform: CGAffineTransform, callback: BufferConsumer) {
         captureSession = AVCaptureSession()
-        if let deviceInput = AVCaptureDeviceInput(device: device, error: nil) where captureSession.canAddInput(deviceInput) {
+        if let deviceInput = try? AVCaptureDeviceInput(device: device) where captureSession.canAddInput(deviceInput) {
             captureSession.addInput(deviceInput)
             let dataOutput = AVCaptureVideoDataOutput()
             dataOutput.alwaysDiscardsLateVideoFrames = true
@@ -58,7 +58,7 @@ private class CaptureBufferDelegate: NSObject, AVCaptureVideoDataOutputSampleBuf
         self.callback = callback
     }
     
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
+    @objc func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
         callback(sampleBuffer)
     }
 }
