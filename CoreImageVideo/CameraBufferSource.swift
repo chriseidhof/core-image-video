@@ -34,7 +34,9 @@ struct CaptureBufferSource {
             captureDelegate = CaptureBufferDelegate { buffer in
                 callback(buffer, transform)
             }
-            dataOutput.setSampleBufferDelegate(captureDelegate, queue: dispatch_get_main_queue())
+            dataOutput.setSampleBufferDelegate(
+                captureDelegate,
+                queue: dispatch_queue_create("sample buffer", DISPATCH_QUEUE_SERIAL))
             captureSession.addOutput(dataOutput)
             captureSession.commitConfiguration()
             return

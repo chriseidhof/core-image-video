@@ -10,7 +10,6 @@ import UIKit
 import AVFoundation
 
 class SimpleFilterViewController: UIViewController {
-    var filter: CIFilter?
     var source: CaptureBufferSource?
     var coreImageView: CoreImageView?
 
@@ -26,7 +25,6 @@ class SimpleFilterViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         setupCameraSource()
 
-        filter = CIFilter(name: "CIHueAdjust", withInputParameters: [:])
     }
 
     override func viewDidDisappear(animated: Bool) {
@@ -35,10 +33,15 @@ class SimpleFilterViewController: UIViewController {
     
     func setupCameraSource() {
         source = CaptureBufferSource(position: AVCaptureDevicePosition.Front) { [unowned self] (buffer, transform) in
-            if let input = CIImage(buffer: buffer)?.imageByApplyingTransform(transform) {
-                self.filter?.setValue(self.angleForCurrentTime, forKey: kCIInputAngleKey)
-                self.filter?.setValue(input, forKey: kCIInputImageKey)
-                self.coreImageView?.image = self.filter?.outputImage //filter(input)
+            guard let input = CIImage(buffer: buffer)?.imageByApplyingTransform(transform) else {
+                return
+            }
+            let filter = CIFilter(name: "CIHueAdjust", withInputParameters: [
+                kCIInputAngleKey: self.angleForCurrentTime,
+                kCIInputImageKey: input
+                ])
+            dispatch_sync(dispatch_get_main_queue()) {
+                self.coreImageView?.image = filter?.outputImage
             }
         }
         source?.running = true

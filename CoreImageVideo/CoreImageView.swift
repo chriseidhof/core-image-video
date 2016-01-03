@@ -23,7 +23,14 @@ class CoreImageView: GLKView {
     }
     
     override init(frame: CGRect, context eaglContext: EAGLContext) {
-        coreImageContext = CIContext(EAGLContext: eaglContext)
+        // Use a null colorspace here for better real-time performance as
+        // per Apple's documentation.
+        coreImageContext = CIContext(
+            EAGLContext: eaglContext,
+            options: [
+                kCIContextWorkingColorSpace: NSNull()
+            ])
+
         super.init(frame: frame, context: eaglContext)
         // We will be calling display() directly, hence this needs to be false
         enableSetNeedsDisplay = false
