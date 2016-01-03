@@ -22,14 +22,21 @@ class CoreImageView: GLKView {
         self.init(frame: frame, context: eaglContext)
     }
     
-    override init(frame: CGRect, context eaglContext: EAGLContext!) {
-        coreImageContext = CIContext(EAGLContext: eaglContext)
+    override init(frame: CGRect, context eaglContext: EAGLContext) {
+        // Use a null colorspace here for better real-time performance as
+        // per Apple's documentation.
+        coreImageContext = CIContext(
+            EAGLContext: eaglContext,
+            options: [
+                kCIContextWorkingColorSpace: NSNull()
+            ])
+
         super.init(frame: frame, context: eaglContext)
         // We will be calling display() directly, hence this needs to be false
         enableSetNeedsDisplay = false
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -37,7 +44,7 @@ class CoreImageView: GLKView {
         if let img = image {
             let scale = self.window?.screen.scale ?? 1.0
             let destRect = CGRectApplyAffineTransform(bounds, CGAffineTransformMakeScale(scale, scale))
-            coreImageContext.drawImage(img, inRect: destRect, fromRect: img.extent())
+            coreImageContext.drawImage(img, inRect: destRect, fromRect: img.extent)
         }
     }
 }

@@ -10,12 +10,12 @@ import UIKit
 import AVFoundation
 
 extension CGAffineTransform {
-    
     init(rotatingWithAngle angle: CGFloat) {
         let t = CGAffineTransformMakeRotation(angle)
         self.init(a: t.a, b: t.b, c: t.c, d: t.d, tx: t.tx, ty: t.ty)
         
     }
+
     init(scaleX sx: CGFloat, scaleY sy: CGFloat) {
         let t = CGAffineTransformMakeScale(sx, sy)
         self.init(a: t.a, b: t.b, c: t.c, d: t.d, tx: t.tx, ty: t.ty)
@@ -25,14 +25,19 @@ extension CGAffineTransform {
     func scale(sx: CGFloat, sy: CGFloat) -> CGAffineTransform {
         return CGAffineTransformScale(self, sx, sy)
     }
+
     func rotate(angle: CGFloat) -> CGAffineTransform {
         return CGAffineTransformRotate(self, angle)
     }
 }
 
 extension CIImage {
-    convenience init(buffer: CMSampleBuffer) {
-        self.init(CVPixelBuffer: CMSampleBufferGetImageBuffer(buffer))
+    convenience init?(buffer: CMSampleBuffer) {
+        if let imageBuffer = CMSampleBufferGetImageBuffer(buffer) {
+            self.init(CVPixelBuffer: imageBuffer)
+        } else {
+            return nil
+        }
     }
 }
 

@@ -10,9 +10,8 @@ import Foundation
 import AVFoundation
 import GLKit
 
-let pixelBufferDict: [NSObject:AnyObject] =
-  [kCVPixelBufferPixelFormatTypeKey: kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
-
+let pixelBufferDict: [String: AnyObject] =
+  [String(kCVPixelBufferPixelFormatTypeKey): Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)]
 
 class VideoSampleBufferSource: NSObject {
     lazy var displayLink: CADisplayLink =
@@ -26,7 +25,7 @@ class VideoSampleBufferSource: NSObject {
         player = AVPlayer(URL: url)
         consumer = callback
         videoOutput = AVPlayerItemVideoOutput(pixelBufferAttributes: pixelBufferDict)
-        player.currentItem.addOutput(videoOutput)
+        player.currentItem?.addOutput(videoOutput)
         
         super.init()
 
@@ -42,10 +41,9 @@ class VideoSampleBufferSource: NSObject {
         let itemTime = videoOutput.itemTimeForHostTime(CACurrentMediaTime())
         if videoOutput.hasNewPixelBufferForItemTime(itemTime) {
             var presentationItemTime = kCMTimeZero
-            let pixelBuffer = videoOutput.copyPixelBufferForItemTime(itemTime, itemTimeForDisplay: &presentationItemTime)
-            consumer(pixelBuffer)
+            if let pixelBuffer = videoOutput.copyPixelBufferForItemTime(itemTime, itemTimeForDisplay: &presentationItemTime) {
+                consumer(pixelBuffer)
+            }
         }
-
     }
-
 }

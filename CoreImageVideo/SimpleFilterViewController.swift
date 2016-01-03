@@ -24,19 +24,26 @@ class SimpleFilterViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         setupCameraSource()
+
     }
-    
+
     override func viewDidDisappear(animated: Bool) {
         source?.running = false
     }
     
     func setupCameraSource() {
         source = CaptureBufferSource(position: AVCaptureDevicePosition.Front) { [unowned self] (buffer, transform) in
-            let input = CIImage(buffer: buffer).imageByApplyingTransform(transform)
-            let filter = hueAdjust(self.angleForCurrentTime)
-            self.coreImageView?.image = filter(input)
+            guard let input = CIImage(buffer: buffer)?.imageByApplyingTransform(transform) else {
+                return
+            }
+            let filter = CIFilter(name: "CIHueAdjust", withInputParameters: [
+                kCIInputAngleKey: self.angleForCurrentTime,
+                kCIInputImageKey: input
+                ])
+            dispatch_sync(dispatch_get_main_queue()) {
+                self.coreImageView?.image = filter?.outputImage
+            }
         }
         source?.running = true
     }
 }
-
